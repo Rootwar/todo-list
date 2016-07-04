@@ -1,0 +1,176 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+
+
+
+@mixin transition {
+	-webkit-transition: 0.3s all ease;
+	-moz-transition: 0.3s all ease;
+	-o-transition: 0.3s all ease;
+	transition: 0.3s all ease;
+}
+@mixin rGradient {
+	background-image: -webkit-radial-gradient(#5cb85c, #274021);
+	background-image: -moz-radial-gradient(#5cb85c, #274021);
+	background-image: -ms-radial-gradient(#5cb85c, #274021);
+	background-image: -o-radial-gradient(#5cb85c, #274021);
+	background-image: radial-gradient(#5cb85c, #274021);
+}
+@mixin lGradient($color1,$color2) {
+	background-image: -webkit-linear-gradient($color1,$color2);
+	background-image: -moz-linear-gradient($color1,$color2);
+	background-image: -ms-linear-gradient($color1,$color2);
+	background-image: -o-linear-gradient($color1,$color2);
+	background-image: linear-gradient($color1,$color2);
+}
+@mixin tShadow($color) {
+	-webkit-text-shadow: $color;
+	-moz-text-shadow: $color;
+	-ms-text-shadow: $color;
+	-o-text-shadow: $color;
+	text-shadow: $color;
+}
+@mixin bShadow($color) {
+	-webkit-box-shadow: $color;
+	-moz-box-shadow: $color;
+	-ms-box-shadow: $color;
+	-o-box-shadow: $color;
+	box-shadow: $color;
+}
+@mixin bRadius {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+@font-face {
+	font-family: 'TrebuchetMS';
+	src: url('../fonts/TrebuchetMS.eot?#iefix') format('embedded-opentype'), url('../fonts/TrebuchetMS.woff') format('woff'), url('../fonts/TrebuchetMS.woff2') format('woff2'), url('../fonts/TrebuchetMS.ttf') format('truetype'), url('../fonts/TrebuchetMS.svg#TrebuchetMS') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+html, body,
+.wrapper {
+	height: 100%;
+}
+.outside-wrap {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 10px;
+} 
+header {
+	background-color: #587D51;
+	font-family: "Open Sans";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	padding: 7px 0;
+	.title {
+		@include tShadow(0 -2px 0 #274021);
+		color: #e2ffd9;
+		font-size: 40px;
+		line-height: 48px;
+		text-align: left;
+		margin: 0 30px 0 0;
+		float: left;
+	}
+	input {
+		@include bRadius();
+		@include transition();
+		display: inline-block;
+		&:focus {
+			outline: none;
+		}
+	}
+	form {
+		overflow: hidden;
+	}
+	.todo {
+		&-text {
+			@include tShadow(0 1px 0 #a8cd9e);
+			background-color: #81a777;
+			color: #0a3405;
+			border: 1px solid #74986b;
+			border-top: 1px solid #2c4826;
+			border-bottom: 1px solid #90c382;
+			font-size: 16px;
+			padding: 10px 15px;
+			width: 75%;
+			float: left;
+			&::-webkit-input-placeholder {
+				color: #0a3405;
+			}
+			&::-moz-input-placeholder {
+				color: #0a3405;
+			}
+			&:focus {
+				background-color: #6ada4f;
+			}
+		}
+		&-add {
+			@include lGradient(#f9fbf8, #97bd8d);
+			@include tShadow(0 1px 0 #dae7d6);
+			@include bShadow(0px 2px 18px -14px #0a3405);
+			border: 1px solid #2c4826;
+			font-size: 18px;
+			text-transform: uppercase;
+			padding: 10px 0;
+			width: 23%;
+			min-width: 120px;
+			float: right;
+			&:hover {
+				@include lGradient(#97bd8d, #f9fbf8);
+			}
+			&:active {
+				@include lGradient(#f9fbf8, #97bd8d);
+			}
+		}
+	}
+}
+
+.main {
+	@include rGradient();
+	font-family: "Open Sans";
+	padding: 85px 0 15px;
+	min-height: 100%;
+	.todo-wrap {
+		ol {
+			list-style-type: none;
+			padding: 0;
+		}
+		li {
+			@include bRadius();
+			color: #e2ffd9;
+			font-weight: 700;
+			line-height: 20px;
+			padding: 5px 15px;
+			&:nth-of-type(odd) {
+				background-color: #6ada4f;
+				color: #0a3405;
+			}
+			&.active {
+				text-decoration: line-through;
+			}
+			span {
+				font-size: 16px;
+				cursor: pointer;
+				position: relative;
+				float: right;
+				&.remove::before {
+					content: "\f00d";
+					font-family: "FontAwesome";
+					position: absolute;
+					right: 0;
+				}
+				&.done::before {
+					content: "✓";
+					position: absolute;
+					right: 25px;
+				}
+			}
+		}
+	}
+}
